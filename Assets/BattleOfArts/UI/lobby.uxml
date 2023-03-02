@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="height: 197px; justify-content: space-around;">
+        <ui:TextField picking-mode="Ignore" label="Room Name :" value="filler text" name="txtRoomName" style="height: 56px; align-items: center; justify-content: center; padding-left: 6px; padding-right: 6px; padding-top: 6px; padding-bottom: 6px; color: rgb(17, 17, 16); font-size: 18px;" />
+        <ui:VisualElement style="flex-direction: row; align-items: stretch; justify-content: center;">
+            <ui:Button text="Start As Player" display-tooltip-when-elided="true" name="btnStartAsPlayer" style="width: 219px; height: 60px; padding-left: 3px; padding-right: 3px; padding-top: 3px; padding-bottom: 3px; margin-right: 1px; margin-left: 1px;" />
+            <ui:Button text="Start as Maker" display-tooltip-when-elided="true" name="btnStartAsMaker" style="width: 235px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

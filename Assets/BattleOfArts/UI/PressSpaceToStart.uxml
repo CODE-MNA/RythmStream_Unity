@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="height: 443px; flex-direction: column; justify-content: center;">
+        <ui:Label text="Press Space to Start.." display-tooltip-when-elided="true" name="lblWaiting" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 24px; color: rgb(250, 231, 143);" />
+    </ui:VisualElement>
+</ui:UXML>
