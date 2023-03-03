@@ -11,6 +11,7 @@ TagManager:
   - NoteManager
   - TimeSource
   - RoundManager
+  - ScoreManager
   layers:
   - Default
   - TransparentFX

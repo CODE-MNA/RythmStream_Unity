@@ -8,6 +8,9 @@ public class NoteReceiver : AbstractNoteGenerator
 
     SocketClient _networkEventClient;
 
+    [SerializeField]
+    float DelayBefore;
+
     private void Awake()
     {
         _networkEventClient = GameObject.FindGameObjectWithTag("SocketClient").GetComponent<SocketClient>();
@@ -16,7 +19,7 @@ public class NoteReceiver : AbstractNoteGenerator
     {
         _networkEventClient.OnNewNoteFromMaker += (noteData)=>
         {
-            noteData.DELAY_BEFORE = 1.4f;
+            noteData.DELAY_BEFORE = 1f;
             noteData.DELAY_AFTER = 0.4f;
             GenerateNextNote(noteData);
         };

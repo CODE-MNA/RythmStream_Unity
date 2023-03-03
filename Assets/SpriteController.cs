@@ -39,7 +39,7 @@ public class SpriteController : MonoBehaviour
     }
     public void ChangeSpriteToCriticalState()
     {
-        spriteRenderer.color = Color.red;
+        spriteRenderer.color = Color.grey;
     }
 
     public void ChangeSpriteToNormal()

@@ -20,12 +20,15 @@ public class SpawnedBeatNote : MonoBehaviour
     Vector3 _endingIndicatorScale;
     float _startTime;
 
+    NoteHitEventManager _eventManager;
 
+    
 
 
     void Start()
     {
         _conductor = GameObject.FindGameObjectWithTag("Conductor").GetComponent<IConductor>();
+        _eventManager = GameObject.FindGameObjectWithTag("NoteManager").GetComponent<NoteHitEventManager>();
 
         _startingIndicatorScale = _circleIndicator.transform.localScale;
 
@@ -51,6 +54,9 @@ public class SpawnedBeatNote : MonoBehaviour
 
         if (_reachedCritical)
         {
+          transform.localScale =  Vector3.MoveTowards(transform.localScale, Vector3.zero, 5 * Time.deltaTime);
+
+
             return;
         };
 
@@ -58,7 +64,7 @@ public class SpawnedBeatNote : MonoBehaviour
 
       _circleIndicator.transform.localScale = Vector3.Lerp(_startingIndicatorScale, _endingIndicatorScale,interpolationValue);
 
-        _spriteController.SetAlpha(interpolationValue); 
+        _spriteController.SetAlpha(interpolationValue + 0.2f); 
 
 
         if (ChangedToCritical())
@@ -71,6 +77,8 @@ public class SpawnedBeatNote : MonoBehaviour
 
             Invoke(nameof(EndCritical), 0.2f);
 
+
+
             Invoke(nameof(EndNote), _noteData.DELAY_AFTER);
 
         }
@@ -82,7 +90,11 @@ public class SpawnedBeatNote : MonoBehaviour
         if (_isHit == true) return;
 
         _isHit = true;
-        print("hit! please fire of an event");
+        
+        _eventManager.OnNoteHit?.Invoke(_noteData,_conductor.GetSongTime());
+
+        
+
     }
 
     void EndNote()

@@ -31,12 +31,20 @@ public class RoundEventManager : MonoBehaviour
 
     private void Awake()
     {
+        try
+        {
+
         _networkClient = GameObject.FindGameObjectWithTag("SocketClient").GetComponent<SocketClient>();
+        _networkClient.OnPlayingRoundStart += StartRound;
+
+        }catch (Exception ex)
+        {
+            print("PLAYING WITHOUT NETWORKING");
+        }
 
          state = RoundState.WaitingToStart;
 
 
-        _networkClient.OnPlayingRoundStart += StartRound;
     }
 
 

@@ -10,12 +10,16 @@ public class TryHitNote : MonoBehaviour
     [SerializeField]
     SpriteRenderer _spriteRenderer;
 
+    [SerializeField]
+    Animation _successAnimation;
 
-    Animation animation;
 
+    Rigidbody2D _rb;
     void Start()
     {
-        
+        _rb = gameObject.GetComponent<Rigidbody2D>();
+        _rb.angularVelocity = 5;
+
     }
 
     // Update is called once per frame
@@ -47,8 +51,30 @@ public class TryHitNote : MonoBehaviour
     {
         if (success)
         {
-            animation.Play();
+            _successAnimation.Play("Success");
+
+            _rb.AddTorque(40);
+
+            Invoke(nameof(CancelTorque), 3);
+           
         }
+        else
+        {
+
+        }
+        
+        
+    }
+
+    void CancelTorque()
+    {
+        _rb.angularVelocity = _rb.angularVelocity / 2;
+
+        if(_rb.angularVelocity < 40)
+        {
+            _rb.angularVelocity = 30;
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
