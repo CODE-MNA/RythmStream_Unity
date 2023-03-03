@@ -16,5 +16,5 @@ MonoBehaviour:
   posY: 4
   noteTimeInSong: 10
   noteNumber: 1
-  DELAY_BEFORE: 1
+  DELAY_BEFORE: 10
   DELAY_AFTER: 1

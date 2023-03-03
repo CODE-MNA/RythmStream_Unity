@@ -11,6 +11,9 @@ public class RoundEventManager : MonoBehaviour
     public UnityEvent RoundStart;
 
     public RoundState state;
+    
+    [SerializeField]
+    bool isReceivingPlayer;
 
     public Action RoundEnd { get; private set; }
 
@@ -31,18 +34,19 @@ public class RoundEventManager : MonoBehaviour
 
     private void Awake()
     {
+         state = RoundState.WaitingToStart;
         try
         {
+            if (!isReceivingPlayer) return;
 
-        _networkClient = GameObject.FindGameObjectWithTag("SocketClient").GetComponent<SocketClient>();
-        _networkClient.OnPlayingRoundStart += StartRound;
+                _networkClient = GameObject.FindGameObjectWithTag("SocketClient").GetComponent<SocketClient>();
+                _networkClient.OnPlayingRoundStart += StartRound;
 
         }catch (Exception ex)
         {
             print("PLAYING WITHOUT NETWORKING");
         }
 
-         state = RoundState.WaitingToStart;
 
 
     }

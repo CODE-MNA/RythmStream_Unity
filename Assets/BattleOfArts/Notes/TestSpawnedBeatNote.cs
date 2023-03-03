@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnedBeatNote : MonoBehaviour
+public class TestSpawnedBeatNote : MonoBehaviour
 {
     public NoteObject _noteData;
     public IConductor _conductor;
+
+    public float spawnTime;
 
     [SerializeField]
     GameObject _circleIndicator;
@@ -15,6 +17,8 @@ public class SpawnedBeatNote : MonoBehaviour
 
      bool _reachedCritical = false;
      bool _isHit = false;
+    bool _ending = false;
+
 
     Vector3 _startingIndicatorScale;
     Vector3 _endingIndicatorScale;
@@ -52,7 +56,7 @@ public class SpawnedBeatNote : MonoBehaviour
     {
         if (_noteData == null) return;
 
-        if (_reachedCritical)
+        if (_ending)
         {
           transform.localScale =  Vector3.MoveTowards(transform.localScale, Vector3.zero, 5 * Time.deltaTime);
 
@@ -60,7 +64,7 @@ public class SpawnedBeatNote : MonoBehaviour
             return;
         };
 
-        float interpolationValue = InterpolateScale(_startTime, _conductor.GetSongTime(), _noteData.noteTimeInSong);
+        float interpolationValue = InterpolateScale(_startTime, _conductor.GetSongTime(), spawnTime);
 
       _circleIndicator.transform.localScale = Vector3.Lerp(_startingIndicatorScale, _endingIndicatorScale,interpolationValue);
 
@@ -77,8 +81,6 @@ public class SpawnedBeatNote : MonoBehaviour
 
             Invoke(nameof(EndCritical), 0.2f);
 
-
-
             Invoke(nameof(EndNote), _noteData.DELAY_AFTER);
 
         }
@@ -90,20 +92,23 @@ public class SpawnedBeatNote : MonoBehaviour
         if (_isHit == true) return;
 
         _isHit = true;
-        
-        _eventManager.OnNoteHit?.Invoke(_noteData,_conductor.GetSongTime());
+        _ending = true;
 
+        _eventManager.OnNoteHit?.Invoke(_noteData,_conductor.GetSongTime());
+        _circleIndicator.SetActive(false);
         
 
     }
 
     void EndNote()
     {
-        Destroy(gameObject);
+        
+        Destroy(gameObject,1f);
     }
     
     void EndCritical()
     {
+        _ending = true;
         _spriteController.ChangeSpriteToNormal();
     }
 
@@ -111,13 +116,13 @@ public class SpawnedBeatNote : MonoBehaviour
     {
         
 
-        if(_conductor.GetSongTime() == _noteData.noteTimeInSong)
+        if(_conductor.GetSongTime() == spawnTime)
         {
             
             return true;
         }
 
-        if(Mathf.Abs(_conductor.GetSongTime()  - _noteData.noteTimeInSong) < 0.2f)
+        if(Mathf.Abs(_conductor.GetSongTime()  - spawnTime) < 0.2f)
         {
             return true;
         }

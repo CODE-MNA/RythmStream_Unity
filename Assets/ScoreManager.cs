@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour
 
         noteHitEventManager.OnNoteHit += (NoteObject obj, float time) =>
         {
-           int score = (int)CalculateScore(obj.noteTimeInSong, time);
+           int score = (int)CalculateScore(obj.noteTimeInSong, time,obj.DELAY_BEFORE);
             
             print(obj.noteTimeInSong - time);
             if(score > 0)
@@ -39,9 +39,9 @@ public class ScoreManager : MonoBehaviour
         
     }
 
-    float CalculateScore(float expectedNoteTime, float timeWhenHit)
+    float CalculateScore(float expectedNoteTime, float timeWhenHit, float freeRange)
     {
-        if(Mathf.Abs(expectedNoteTime - timeWhenHit) < 0.07f)
+        if(Mathf.Abs(expectedNoteTime - timeWhenHit) < 0.06f)
         {
             return 500;
         }
@@ -50,11 +50,11 @@ public class ScoreManager : MonoBehaviour
 
             float diff = Mathf.Abs(expectedNoteTime - timeWhenHit);
 
-            float final = (500 - (500 * (diff /2f)));
+            float final = (500 - (1000 * (diff /freeRange)));
 
             int bonus = combo * 50;
 
-            if(final < 0)
+            if(final < 250)
             {
                 combo = 0;
                 return 0;

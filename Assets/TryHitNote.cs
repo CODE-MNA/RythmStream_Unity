@@ -13,6 +13,9 @@ public class TryHitNote : MonoBehaviour
     [SerializeField]
     Animation _successAnimation;
 
+    [SerializeField]
+    GameObject _destroyEffect;
+
 
     Rigidbody2D _rb;
     void Start()
@@ -37,6 +40,9 @@ public class TryHitNote : MonoBehaviour
             {
                 VisualizeHit(true);
                 _hoveringNote.PerformHit();
+
+                GameObject.Instantiate(_destroyEffect, transform.position, Quaternion.identity);
+
             }
             else
             {
