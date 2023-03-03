@@ -73,6 +73,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   state: 0
+  isReceivingPlayer: 0
 --- !u!1 &1548051134930129437
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,8 @@ public class TryHitNote : MonoBehaviour
     [SerializeField]
     GameObject _destroyEffect;
 
+    [SerializeField]
+    AudioSource _hit;
 
     Rigidbody2D _rb;
     void Start()
@@ -58,7 +60,7 @@ public class TryHitNote : MonoBehaviour
         if (success)
         {
             _successAnimation.Play("Success");
-
+            _hit.Play();
             _rb.AddTorque(40);
 
             Invoke(nameof(CancelTorque), 3);

@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _noteData: {fileID: 11400000, guid: e7bb8e0406050c54caf74f93080490c6, type: 2}
-  spawnTime: 0
+  spawnTime: 10.06
   _circleIndicator: {fileID: 7218145947305724610}
   _spriteController: {fileID: 2194630470582239762}
 --- !u!1 &4012453004779536996
@@ -172,7 +172,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7218145947305724610

@@ -24,6 +24,7 @@ public class SpawnedBeatNote : MonoBehaviour
 
     NoteHitEventManager _eventManager;
 
+
     
 
 
@@ -57,7 +58,10 @@ public class SpawnedBeatNote : MonoBehaviour
         if (_ending)
         {
           transform.localScale =  Vector3.MoveTowards(transform.localScale, Vector3.zero, 5 * Time.deltaTime);
-
+            if(transform.localScale.sqrMagnitude <= Vector3.zero.sqrMagnitude)
+            {
+                EndNote();
+            }
 
             return;
         };
@@ -73,7 +77,7 @@ public class SpawnedBeatNote : MonoBehaviour
         {
            
             _reachedCritical = true;
-            _spriteController.ChangeSpriteToCriticalState();
+         
 
             //Critical End
 
@@ -120,7 +124,7 @@ public class SpawnedBeatNote : MonoBehaviour
             return true;
         }
 
-        if(Mathf.Abs(_conductor.GetSongTime()  - _noteData.noteTimeInSong) < 0.2f)
+        if(Mathf.Abs(_conductor.GetSongTime()  - _noteData.noteTimeInSong) < 0.1f)
         {
             return true;
         }
