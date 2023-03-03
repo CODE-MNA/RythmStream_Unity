@@ -10,6 +10,7 @@ public class MousePlayerMovement : MonoBehaviour
     void Start()
     {
         _cam = Camera.main;
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
     }
 

@@ -10,6 +10,8 @@ public class NoteMakerPlayerMovement : MonoBehaviour
     private const string HorizontalAxisName = "Horizontal";
     private const string VerticalAxisName = "Vertical";
 
+    TrailRenderer trailRenderer;
+
     Rigidbody2D _rb;
 
 
@@ -29,13 +31,16 @@ public class NoteMakerPlayerMovement : MonoBehaviour
     [SerializeField]
     private float _acceleration = 0.125f;
 
-
+    Color originalTrailColor;
     float _deceleration;
 
     RoundEventManager _eventManager;
     void InjectComponents()
     {
-     
+        trailRenderer = GetComponent<TrailRenderer>();
+
+
+        originalTrailColor = trailRenderer.startColor;
         _rb = GetComponent<Rigidbody2D>();
 
         _eventManager = GameObject.FindGameObjectWithTag("RoundManager").GetComponent<RoundEventManager>() ;
@@ -74,11 +79,11 @@ public class NoteMakerPlayerMovement : MonoBehaviour
     private void MoveCharacterRigidbody(Vector2 movement)
     {
 
+                trailRenderer.endColor = originalTrailColor;
         //No input
         if(movement.x == 0 && movement.y == 0)
         {
             _moveSpeed -= _deceleration;
-
         }
         else
         {
@@ -86,7 +91,11 @@ public class NoteMakerPlayerMovement : MonoBehaviour
             if (_moveSpeed < _maxSpeed)
             {
                 _moveSpeed += _acceleration;
-
+            }
+            else
+            {
+            trailRenderer.endColor = Color.red;
+                
             }
         }
 
